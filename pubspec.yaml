@@ -32,6 +32,8 @@ dependencies:
   intl: ^0.17.0
   ntp: ^2.0.0
   date_time_picker: ^2.1.0
+  date_count_down: ^0.0.2
+  timer_builder: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
