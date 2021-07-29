@@ -10,9 +10,10 @@ class _DayPickersState extends State<DayPickers> {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   List<String> _numbers = ["0.5", "1.0", "1.5", "2.0", "2.5", "3.0"];
 
-     DateTime currentDate = DateTime.now();
+  DateTime currentDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
-    final SharedPreferences prefs = await _prefs;
+    final prefs = await SharedPreferences.getInstance();
+
     final DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: currentDate,
