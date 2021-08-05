@@ -20,7 +20,12 @@ class SmokingCenter extends StatelessWidget {
               return  Column(
                 children: [
                   Container(
-                    color: Colors.white,
+                    margin: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black),
+                    ),
                     child: ListTile(
                         leading: Text('${list.centerlist[index]}') ,
                         title: Text('${list.add[index]}'),

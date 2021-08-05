@@ -15,10 +15,11 @@ class QuotesPage extends StatelessWidget {
         itemCount: list.quotes.length,
         itemBuilder: (BuildContext content, int index) {
           return Container(
-              constraints: BoxConstraints(
+            constraints: BoxConstraints(
               minHeight: 50, //minimum height
               minWidth: 100,
-              ),// minimum width
+            ),
+            // minimum width
             margin: EdgeInsets.all(10),
             height: 170,
             decoration: BoxDecoration(
