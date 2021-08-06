@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nosmoking/ui/dropdown_page.dart';
 import 'package:flutter_nosmoking/ui/navigation_bar.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DayPickers extends StatefulWidget {
@@ -11,6 +14,8 @@ class DayPickers extends StatefulWidget {
 class _DayPickersState extends State<DayPickers> {
   List<String> _numbers = ["0.5", "1.0", "1.5", "2.0", "2.5", "3.0"];
   DateTime currentDate = DateTime.now();
+
+
 
   Future<void> _selectDate(BuildContext context) async {
     var prefs = await SharedPreferences.getInstance();
@@ -24,8 +29,10 @@ class _DayPickersState extends State<DayPickers> {
         currentDate = pickedDate;
       });
     await prefs.setInt('date', pickedDate!.millisecondsSinceEpoch);
+
     print(prefs.getInt('date'));
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +58,26 @@ class _DayPickersState extends State<DayPickers> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.black),
                   onPressed: () => _selectDate(context),
-                  child: Text('금연시작날짜'),
+                  child: Text('금연시작날짜',style: TextStyle(fontSize: 20)),
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 10,
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () {},
-                    child: Text('${currentDate.toString().substring(0, 10)}')),
+                    child: Text('${currentDate.toString().substring(0, 10)}',style: TextStyle(fontSize: 20),)),
                 SizedBox(
-                  height: 150,
+                  height: 100,
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('흡연량(갑 기준)',style: TextStyle(color: Colors.white,fontSize: 20),),
+                SizedBox(width: 50,),
+                SizedBox(width:55,height: 40,child: DropDownPage()),
               ],
             ),
             ElevatedButton(
@@ -73,12 +88,12 @@ class _DayPickersState extends State<DayPickers> {
                   MaterialPageRoute(
                     builder: (BuildContext context) => Home(),
                   ),
-                  (route) => false,
+                      (route) => false,
                 );
               },
               child: Text(
                 '시작하기',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white,fontSize: 20),
               ),
             ),
           ],

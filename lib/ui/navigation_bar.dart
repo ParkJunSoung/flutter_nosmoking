@@ -29,12 +29,12 @@ class _HomeState extends State<Home> {
             child: Text(
           '🚭',
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 55,
             fontFamily: 'Jua-Regular',
           ),
         )),
-        backgroundColor: Colors.grey[200],
-        toolbarHeight: 50,
+        backgroundColor: Colors.black,
+        toolbarHeight: 70,
         elevation: 0,
       ),
       extendBody: true,
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
         letIndexChange: (index) => true,
       ),
       body: Container(
-        color: Colors.grey[100],
+        color: Colors.black,
         child: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),

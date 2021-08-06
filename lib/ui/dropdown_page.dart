@@ -1,46 +1,60 @@
-import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class DropDownPage extends StatefulWidget {
   const DropDownPage({Key? key}) : super(key: key);
 
+
   @override
   _DropDownPageState createState() => _DropDownPageState();
+
 }
 
 class _DropDownPageState extends State<DropDownPage> {
+  String dropdownValue = '1';
+
+
+
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    const List category_map = [
-      {"code": "1", "title": "1월"},
-      {"code": "2", "title": "2월"},
-      {"code": "3", "title": "3월"},
-    ];
-    String? _category;
-    String? _categoryResult;
+
     return Material(
-      child: SizedBox(
-        height: 100,
-        width: 200,
-        child: DropDownFormField(
-          hintText: '카테고리를 선택해주세요.',
-          value: _category != null ? _category : '',
-          onSaved: (value) {
-            setState(() {
-              _category = value;
-            });
-          },
-          onChanged: (value) {
-            setState(() {
-              _category = value;
-              _categoryResult = _category;
-            });
-          },
-          dataSource: category_map,
-          textField: 'title',
-          valueField: 'code',
+      color: Colors.white,
+      child: DropdownButton<String>(
+        value: dropdownValue,
+        icon: const Icon(Icons.arrow_downward,color: Colors.white,),
+        iconSize: 24,
+        elevation: 16,
+        style: const TextStyle(color: Colors.black,fontSize: 20),
+        underline: Container(
+          height: 4,
+          color: Colors.white,
         ),
+        onChanged: (String? newValue) {
+          setState(() {
+            dropdownValue = newValue!;
+          });
+          putShared('dates', newValue! );
+          print(newValue);
+        },
+        items: <String>['1', '1.5', '2.0', '2.5','3.0']
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
       ),
     );
+  }
+  void putShared(String key, String val) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, val);
+
   }
 }

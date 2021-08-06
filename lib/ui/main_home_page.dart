@@ -4,6 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timer_builder/timer_builder.dart';
 
+String dateMillisecondsToString(int mills) {
+  return DateFormat('yyyyMMdd')
+      .format(DateTime.fromMillisecondsSinceEpoch(mills));
+}
+
 class ClockWidget extends StatefulWidget {
   @override
   _ClockWidgetState createState() => _ClockWidgetState();
@@ -11,12 +16,16 @@ class ClockWidget extends StatefulWidget {
 
 class _ClockWidgetState extends State<ClockWidget> {
   Timer? _timer;
-  int? date;
+  var date;
+  String? dates;
 
   _loadCounter() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       date = (prefs.getInt('date'));
+      dates = (prefs.getString('dates'));
+
+      print(dates);
     });
   }
 
@@ -24,26 +33,38 @@ class _ClockWidgetState extends State<ClockWidget> {
   void initState() {
     super.initState();
     _loadCounter();
+
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
     });
   }
 
+  // String getString() {
+  //   if (date! <= 1827025200000) {
+  //     return '😵';
+  //   } else if (date! <= 77777777) {
+  //     return '😐';
+  //   } else {
+  //     return '😋';
+  //   }
+  // }
+
   Widget build(BuildContext context) {
     var due = DateTime.now().add(Duration(hours: 9));
-    // var d12 = DateFormat('MM/dd/yyyy, hh:mm a').format(date);
-    // Duration d12 =  Duration(milliseconds: date);
+    int sum = 4500;
+    var dated = num.parse(dates!);
 
     return TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
       return Material(
-        color: Colors.grey[200],
+        color: Colors.black,
         child: Column(
           children: [
-            Text('금연시간',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            Text('금연시작',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.white)),
             Text(
-              '${due.difference(DateTime.parse('20210730'))}'.substring(0, 9),
-              style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold),
+              '${due.difference(DateTime.parse('${dateMillisecondsToString(date)}'))}'
+                  .substring(0, 8),
+              style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold,color: Colors.white),
             ),
             Row(
               children: [
@@ -51,6 +72,7 @@ class _ClockWidgetState extends State<ClockWidget> {
                   width: 120,
                 ),
                 Text(
+
                   '시',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -77,35 +99,62 @@ class _ClockWidgetState extends State<ClockWidget> {
                     width: 180,
                     margin: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.black,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white,
+                          spreadRadius: 3,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
                       // border: Border.all(color: Colors.black),
                     ),
-                    child: Text(
-                      '\n${date} \n 54,000원',
-                      style: TextStyle(fontSize: 20),
-                      textAlign: TextAlign.center,
+                    child: Column(
+                      children: [
+                        Text('절약된 금액 \n',
+                          style: TextStyle(fontSize: 20, color: Colors.white),),
+                        Text(
+                          '${dated! * sum} 원',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     )),
-                SizedBox(width: 10),
+                SizedBox(width: 15),
                 Container(
                   height: 100,
                   width: 180,
                   margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white,
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                     // image: DecorationImage(
                     //   image: AssetImage("assets/images/black.jpg"),
                     //   fit: BoxFit.cover,
                     // ),
-                    color: Colors.white,
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(10),
                     // border: Border.all(color: Colors.black),
                   ),
-                  child: Text(
-                    '\n 늘어난 수명 \n  11:44:31',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                    textAlign: TextAlign.center,
+                  child:  Column(
+                    children: [
+                      Text('늘어난수명 \n ',
+                        style: TextStyle(fontSize: 20, color: Colors.white),),
+                      Text(
+                        '${due.difference(DateTime.parse('${dateMillisecondsToString(date)}'))}'
+                            .substring(0, 8),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -118,7 +167,15 @@ class _ClockWidgetState extends State<ClockWidget> {
                     width: 180,
                     margin: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white,
+                          spreadRadius: 3,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                      color: Colors.black,
                       borderRadius: BorderRadius.circular(10),
                       // border: Border.all(color: Colors.black),
                     ),
@@ -127,48 +184,41 @@ class _ClockWidgetState extends State<ClockWidget> {
                         Text(
                           '건강상태',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20,color: Colors.white
                           ),
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          '🥴',
+                          '😀',
                           style: TextStyle(fontSize: 40),
                         ),
                       ],
                     )),
-                SizedBox(width: 10),
+                SizedBox(width: 15),
                 Container(
                   height: 100,
                   width: 180,
                   margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white,
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(10),
                     // border: Border.all(color: Colors.black),
                   ),
                   child: Text(
-                    '\n 목표',
-                    style: TextStyle(fontSize: 20),
+                    '목표',
+                    style: TextStyle(fontSize: 20,color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ],
-            ),
-            Container(
-              height: 140,
-              width: 380,
-              margin: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                // border: Border.all(color: Colors.black),
-              ),
-              child: Text(
-                '광고',
-                style: TextStyle(fontSize: 80),
-                textAlign: TextAlign.center,
-              ),
             ),
           ],
         ),
