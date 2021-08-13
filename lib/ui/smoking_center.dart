@@ -11,16 +11,23 @@ class SmokingCenter extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 25,),
-          Text('전국 금연 클리닉',style: TextStyle(fontSize: 30,color: Colors.white),),
-          SizedBox(height: 25,),
+          SizedBox(
+            height: 25,
+          ),
+          Text(
+            '전국 금연 클리닉',
+            style: TextStyle(fontSize: 30, color: Colors.white),
+          ),
+          SizedBox(
+            height: 25,
+          ),
           ListView.builder(
             padding: EdgeInsets.all(10),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: list.centerlist.length,
             itemBuilder: (BuildContext content, int index) {
-              return  Container(
+              return Container(
                 margin: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -35,12 +42,16 @@ class SmokingCenter extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 child: ListTile(
-                    leading: Text('${list.centerlist[index]}',style: TextStyle(color: Colors.white),) ,
-                    title: Text('${list.add[index]}',style: TextStyle(color: Colors.white)),
-                    subtitle: Text('${list.number[index]}',style: TextStyle(color: Colors.white)),
+                  leading: Text(
+                    '${list.centerlist[index]}',
+                    style: TextStyle(color: Colors.white),
                   ),
+                  title: Text('${list.add[index]}',
+                      style: TextStyle(color: Colors.white)),
+                  subtitle: Text('${list.number[index]}',
+                      style: TextStyle(color: Colors.white)),
+                ),
               );
             },
           ),

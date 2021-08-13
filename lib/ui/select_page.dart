@@ -1,9 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nosmoking/ui/dropdown_page.dart';
 import 'package:flutter_nosmoking/ui/navigation_bar.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DayPickers extends StatefulWidget {
@@ -12,7 +12,6 @@ class DayPickers extends StatefulWidget {
 }
 
 class _DayPickersState extends State<DayPickers> {
-  List<String> _numbers = ["0.5", "1.0", "1.5", "2.0", "2.5", "3.0"];
   DateTime currentDate = DateTime.now();
 
 
@@ -42,16 +41,7 @@ class _DayPickersState extends State<DayPickers> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/b.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

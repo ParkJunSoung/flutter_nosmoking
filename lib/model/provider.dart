@@ -41,7 +41,7 @@ class ListProvider extends ChangeNotifier {
     '10년 후 : 폐암 사망률이 일반인과 같아집니다.',
     '15년 후 : 심장병 발병 위험이 일반인과 같아집니다.',
   ];
-  List<Color> ColorList = [
+  List<Color> colorList = [
     Colors.red,
     Colors.deepPurple,
     Colors.orange,

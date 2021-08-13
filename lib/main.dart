@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nosmoking/model/provider.dart';
-import 'package:flutter_nosmoking/ui/dropdown_page.dart';
 import 'package:flutter_nosmoking/ui/select_page.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

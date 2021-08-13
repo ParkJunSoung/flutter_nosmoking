@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,16 +40,6 @@ class _ClockWidgetState extends State<ClockWidget> {
     });
   }
 
-  // String getString() {
-  //   if (date! <= 1827025200000) {
-  //     return '😵';
-  //   } else if (date! <= 77777777) {
-  //     return '😐';
-  //   } else {
-  //     return '😋';
-  //   }
-  // }
-
   Widget build(BuildContext context) {
     var due = DateTime.now().add(Duration(hours: 9));
     int sum = 4500;
@@ -60,11 +51,17 @@ class _ClockWidgetState extends State<ClockWidget> {
         child: Column(
           children: [
             Text('금연시작',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.white)),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
             Text(
               '${due.difference(DateTime.parse('${dateMillisecondsToString(date)}'))}'
                   .substring(0, 8),
-              style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold,color: Colors.white),
+              style: TextStyle(
+                  fontSize: 55,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
             Row(
               children: [
@@ -72,7 +69,6 @@ class _ClockWidgetState extends State<ClockWidget> {
                   width: 120,
                 ),
                 Text(
-
                   '시',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -113,10 +109,12 @@ class _ClockWidgetState extends State<ClockWidget> {
                     ),
                     child: Column(
                       children: [
-                        Text('절약된 금액 \n',
-                          style: TextStyle(fontSize: 20, color: Colors.white),),
                         Text(
-                          '${dated! * sum} 원',
+                          '절약된 금액 \n',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        Text(
+                          '${dated * sum} 원',
                           style: TextStyle(fontSize: 20, color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
@@ -144,10 +142,12 @@ class _ClockWidgetState extends State<ClockWidget> {
                     borderRadius: BorderRadius.circular(10),
                     // border: Border.all(color: Colors.black),
                   ),
-                  child:  Column(
+                  child: Column(
                     children: [
-                      Text('늘어난수명 \n ',
-                        style: TextStyle(fontSize: 20, color: Colors.white),),
+                      Text(
+                        '늘어난수명 \n ',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
                       Text(
                         '${due.difference(DateTime.parse('${dateMillisecondsToString(date)}'))}'
                             .substring(0, 8),
@@ -183,9 +183,7 @@ class _ClockWidgetState extends State<ClockWidget> {
                       children: [
                         Text(
                           '건강상태',
-                          style: TextStyle(
-                            fontSize: 20,color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
                         Text(
@@ -214,7 +212,7 @@ class _ClockWidgetState extends State<ClockWidget> {
                   ),
                   child: Text(
                     '목표',
-                    style: TextStyle(fontSize: 20,color: Colors.white),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 ),

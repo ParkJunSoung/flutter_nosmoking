@@ -11,7 +11,9 @@ class QuotesPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 25,),
+          SizedBox(
+            height: 25,
+          ),
           ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
